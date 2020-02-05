@@ -1,3 +1,6 @@
+__pycache__/
+ask/ask/__pycache__/
+ask/qa/__pycache__/
+
 ask/db.sqlite3
-/__pycache__
 ask/qa/migrations/

@@ -1,0 +1,3 @@
+**/__pycache__/
+ask/db.sqlite3
+ask/qa/migrations/

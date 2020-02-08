@@ -6,6 +6,6 @@ def test(request, *args, **kwargs):
 	return HttpResponse('OK')
 
 def quest(request, id):
-	ans = 'ID=' + str(id) + '\n'
-	ans += str(request.GET)
+	ans = 'ID = ' + str(id) + "<br>"
+	ans += str(dict(request.GET))
 	return HttpResponse(ans)

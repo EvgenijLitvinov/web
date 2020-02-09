@@ -7,8 +7,6 @@ def test(request, *args, **kwargs):
 	return HttpResponse('OK')
 
 def quest(request, id):
-	res = Question.objects.get(title='ooo')
 	ans = 'ID = ' + str(id) + "<br>"
 	ans += str(dict(request.GET)) + "<br>"
-	ans += res
 	return HttpResponse(ans)

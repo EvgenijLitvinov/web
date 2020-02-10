@@ -7,6 +7,10 @@ def test(request, *args, **kwargs):
 	return HttpResponse('OK')
 
 def quest(request, id):
+	try:
+		ss = Question.objects.all()[:1]
+	except Question.DoesNotExist:
+		ss = 'nea'
 	ans = 'ID = ' + str(id) + "<br>"
-	ans += str(dict(request.GET)) + "<br>"
+	ans += str(ss)
 	return HttpResponse(ans)

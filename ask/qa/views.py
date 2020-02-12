@@ -13,4 +13,4 @@ def quest(request, id):
 		ss = 'nea'
 	ans = 'ID = ' + str(id) + "<br>"
 	ans += str(ss)
-	return HttpResponse(ans)
+	return render(request, 'qa/index.html', {'asdf': id, 'db': ss})

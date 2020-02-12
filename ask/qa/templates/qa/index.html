@@ -1,4 +1,7 @@
 <h2>I don't know anything</h2>
-<p>And now - {{asdf}}</p>
-<div>again - {{db}}</div>
-{{Question.title}} - {{Question.text}}
+<p>Zagolovok - {{qu.title}}</p>
+<p>Tekst - {{qu.text}}</p>
+<p>Otveti:</p>
+{% for i in an %}
+<h5>{{i.text}}</h5>
+{% endfor %}

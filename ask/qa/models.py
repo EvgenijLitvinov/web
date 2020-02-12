@@ -29,8 +29,3 @@ class Answer(models.Model):
     added_at = models.DateField(auto_now_add=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-
-#us = User(username='Jack')
-#us.save()
-#aa = Question(title='aaa', text='ccc', author=us)
-#aa.save()

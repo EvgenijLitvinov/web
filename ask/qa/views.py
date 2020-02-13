@@ -6,7 +6,14 @@ from django.http import HttpResponse
 def test(request, *args, **kwargs):
 	return HttpResponse('OK')
 
+def man(request):
+	page = request.GET.get('page')
+	return HttpResponse(page)
+
 def quest(request, id):
 	qu = get_object_or_404(Question, id=id)
-	an = Answer.objects.filter(question=qu)
-	return render(request, 'qa/index.html', {'qu': qu, 'an': an})
+	try:
+		an = Answer.objects.filter(question=qu)
+	except Answer.DoesNotExist:
+		an = None
+	return render(request, 'qa/question_pattern.html', {'qu': qu, 'an': an})

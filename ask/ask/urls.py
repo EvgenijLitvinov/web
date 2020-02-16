@@ -24,6 +24,6 @@ urlpatterns = [
 	path('signup/', views.test, name='signup'),
 	path('question/<int:id>/', views.quest, name='quesion'),
 	path('ask/', views.test, name='ask'),
-	path('popular/', views.test, name='popular'),
+	path('popular/', views.popul, name='popular'),
 	path('new/', views.test, name='new')
 ]

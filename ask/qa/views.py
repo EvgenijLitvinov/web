@@ -28,7 +28,7 @@ def popul(request):
 	questions = Question.objects.popular()
 	page = request.GET.get('page', 1)
 	paginator = Paginator(questions, 10)
-	paginator.baseurl = '/?page='
+	paginator.baseurl = '/popular/?page='
 	page = paginator.page(page)
 	return render(request, 'qa/main.html', {
 		'questions': page.object_list,

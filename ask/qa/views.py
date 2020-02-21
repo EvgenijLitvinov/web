@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from qa.models import Question, Answer
+from qa.forms import AskForm, AnswerForm
 from django.http import HttpResponse
 def test(request, *args, **kwargs):
 	return HttpResponse('OK')
@@ -23,6 +24,13 @@ def quest(request, id):
 	except Answer.DoesNotExist:
 		an = None
 	return render(request, 'qa/question.html', {'qu': qu, 'an': an})
+
+def askk(request):
+	if request.method == 'POST':
+		form = AskForm(request.POST)
+	else:
+		form = AskForm()
+	return render(request, 'qa/ask_add.html', {'form': form})
 
 def popul(request):
 	questions = Question.objects.popular()

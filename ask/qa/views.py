@@ -26,6 +26,9 @@ def quest(request, id):
 		an = None
 	if request.method == 'POST':
 		form = AnswerForm(request.POST)
+		if form.is_valid():
+			ans = form.save(id)
+			return HttpResponseRedirect(ans.get_url())
 	else:
 		form = AnswerForm(initial={'text': '', 'question': id})
 	return render(request, 'qa/question.html', {'qu': qu, 'an': an, 'form': form})

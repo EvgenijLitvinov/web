@@ -15,8 +15,10 @@ class AskForm(forms.Form):
 
 class AnswerForm(forms.Form):
     text = forms.CharField()
-    question = forms.CharField()
+    question = forms.IntegerField()
 
-    def save(self):
-        pass
+    def save(self, id):
+        aa = Question.objects.get(id=id)
+        Answer.objects.create(text=self.cleaned_data['text'], author = User.objects.get(id=1), question = aa)
+        return aa
     

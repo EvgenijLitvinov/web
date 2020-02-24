@@ -9,10 +9,11 @@
 <h5>{{i.text}}</h5>
 {% endfor %}
 
+<h3>Add answer</h3>
 {% for e in form.non_field_errors %}
     <div class="alert alert-danger">{{ e }}</div>
 {% endfor %}
-<form class="form-horizontal" method="post" action="">
+<form class="form-horizontal" method="post">
     {% csrf_token %}
     <fieldset>
         {% for field in form %}

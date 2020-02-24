@@ -25,7 +25,7 @@ def quest(request, id):
 	except Answer.DoesNotExist:
 		an = None
 	if request.method == 'POST':
-		form = AnswerForm(request.POST, initial={'text': '', 'question': id})
+		form = AnswerForm(request.POST)
 	else:
 		form = AnswerForm(initial={'text': '', 'question': id})
 	return render(request, 'qa/question.html', {'qu': qu, 'an': an, 'form': form})

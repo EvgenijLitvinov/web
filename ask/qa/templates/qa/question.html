@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 <h2>I don't know anything</h2>
 <p>Zagolovok - {{qu.title}}</p>
 <p>Tekst - {{qu.text}}</p>
@@ -5,3 +8,21 @@
 {% for i in an %}
 <h5>{{i.text}}</h5>
 {% endfor %}
+
+{% for e in form.non_field_errors %}
+    <div class="alert alert-danger">{{ e }}</div>
+{% endfor %}
+<form class="form-horizontal" method="post" action="">
+    {% csrf_token %}
+    <fieldset>
+        {% for field in form %}
+            <div class="control-group{% if field.errors %} has-error{% endif %}">
+                <label class="control-label">{{ field.label }}</label>
+                <div class="controls">{{ field }}</div>
+            </div>
+        {% endfor %}
+    </fieldset>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary"> SAVE </button>
+</div>
+</form>

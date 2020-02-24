@@ -24,7 +24,11 @@ def quest(request, id):
 		an = Answer.objects.filter(question=qu)
 	except Answer.DoesNotExist:
 		an = None
-	return render(request, 'qa/question.html', {'qu': qu, 'an': an})
+	if request.method == 'POST':
+		form = AnswerForm(request.POST, initial={'text': '', 'question': id})
+	else:
+		form = AnswerForm(initial={'text': '', 'question': id})
+	return render(request, 'qa/question.html', {'qu': qu, 'an': an, 'form': form})
 
 def askk(request):
 	if request.method == 'POST':

@@ -15,3 +15,4 @@ class AskForm(forms.Form):
 
 class AnswerForm(forms.Form):
     text = forms.CharField()
+    question = forms.CharField()

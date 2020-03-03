@@ -1,9 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from qa.models import Question, Answer
-from qa.forms import AskForm, AnswerForm
+from qa.forms import AskForm, AnswerForm, SignUpForm
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm
 
 
 def test(request, *args, **kwargs):
@@ -22,12 +21,12 @@ def man(request):
 
 def signup(request):
 	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
+		form = SignUpForm(request.POST)
 		if form.is_valid():
 			form.save()
 		return redirect('main')
 	else:
-		form = UserCreationForm()
+		form = SignUpForm()
 		return render(request, 'qa/signup.html', {'form': form})
 
 def quest(request, id):

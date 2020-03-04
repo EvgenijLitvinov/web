@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from qa.models import Question, Answer
 from qa.forms import AskForm, AnswerForm, SignUpForm
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login
 
 
 def test(request, *args, **kwargs):
@@ -24,6 +25,10 @@ def signup(request):
 		form = SignUpForm(request.POST)
 		if form.is_valid():
 			form.save()
+		username=form.cleaned_data['username']
+		password=form.cleaned_data['password1']
+		user = authenticate(username=username, password=password)
+		print(user)
 		return redirect('main')
 	else:
 		form = SignUpForm()

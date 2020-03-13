@@ -24,17 +24,11 @@ def signup(request):
 	if request.method == 'POST':
 		form = SignUpForm(request.POST)
 		if form.is_valid():
-			asd = form.save()
-			print('form.save()=', asd)
-			print('request.user=', request.user)
-			print('requset.session=', dict(request.session))
+			form.save()
 			username=form.cleaned_data['username']
 			password=form.cleaned_data['password1']
 			user = authenticate(username=username, password=password)
 			login(request, user)
-			print('authenticate user=', user)
-			print('request.user=', request.user)
-			print('requset.session=', dict(request.session))
 			return redirect('main')
 	else:
 		form = SignUpForm()

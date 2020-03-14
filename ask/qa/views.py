@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from qa.models import Question, Answer
-from qa.forms import AskForm, AnswerForm, SignUpForm
+from qa.forms import AskForm, AnswerForm, SignUpForm, LoginForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 
@@ -20,14 +20,30 @@ def man(request):
 		'paginator': paginator, 'page': page
 	})
 
+
+def loginn(request):
+	if request.method == 'POST':
+		form = LoginForm(request.POST)
+		if form.is_valid():
+			cd = form.cleaned_data
+			user = authenticate(username=cd['username'], password=cd['password'])
+			if user:
+				login(request, user)
+				return redirect('main')
+			else:
+#				form.errors = 'invalid username or password'
+				print(dict(form.errors))
+	else:
+		form = LoginForm()
+	return render(request, 'qa/login.html', {'form': form})
+
 def signup(request):
 	if request.method == 'POST':
 		form = SignUpForm(request.POST)
 		if form.is_valid():
 			form.save()
-			username=form.cleaned_data['username']
-			password=form.cleaned_data['password1']
-			user = authenticate(username=username, password=password)
+			cd = form.cleaned_data
+			user = authenticate(username=cd['username'], password=cd['password1'])
 			login(request, user)
 			return redirect('main')
 	else:

@@ -23,7 +23,7 @@ class AskForm(forms.Form):
 
     def save(self):
         aa = Question(**self.cleaned_data)
-        aa.author = User.objects.get(id=1)
+        aa.author = User.objects.get(username=self._user)
         aa.save()
         return aa
         
@@ -34,6 +34,6 @@ class AnswerForm(forms.Form):
 
     def save(self, id):
         aa = Question.objects.get(id=id)
-        Answer.objects.create(text=self.cleaned_data['text'], author = User.objects.get(id=1), question = aa)
+        Answer.objects.create(text=self.cleaned_data['text'], author = User.objects.get(username=self._user), question = aa)
         return aa
     

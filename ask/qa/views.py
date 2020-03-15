@@ -26,7 +26,6 @@ def loginn(request):
 	if request.method == 'POST':
 		form = LoginForm(request.POST)
 		if form.is_valid():
-			print('valid')
 			cd = form.cleaned_data
 			user = authenticate(username=cd['username'], password=cd['password'])
 			if user:
@@ -59,6 +58,7 @@ def quest(request, id):
 		an = None
 	if request.method == 'POST':
 		form = AnswerForm(request.POST)
+		form._user = request.user
 		if form.is_valid():
 			ans = form.save(id)
 			return HttpResponseRedirect(ans.get_url())
@@ -69,6 +69,7 @@ def quest(request, id):
 def askk(request):
 	if request.method == 'POST':
 		form = AskForm(request.POST)
+		form._user = request.user
 		if form.is_valid():
 			ask = form.save()
 			return HttpResponseRedirect(ask.get_url())

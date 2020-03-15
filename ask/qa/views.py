@@ -22,20 +22,21 @@ def man(request):
 
 
 def loginn(request):
+	error = ''
 	if request.method == 'POST':
 		form = LoginForm(request.POST)
 		if form.is_valid():
+			print('valid')
 			cd = form.cleaned_data
 			user = authenticate(username=cd['username'], password=cd['password'])
 			if user:
 				login(request, user)
 				return redirect('main')
 			else:
-#				form.errors = 'invalid username or password'
-				print(dict(form.errors))
+				error = 'Invalid username or password. Try again!'
 	else:
 		form = LoginForm()
-	return render(request, 'qa/login.html', {'form': form})
+	return render(request, 'qa/login.html', {'form': form, 'error': error})
 
 def signup(request):
 	if request.method == 'POST':

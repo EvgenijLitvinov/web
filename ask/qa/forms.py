@@ -14,8 +14,7 @@ class SignUpForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
     def save(self):
-        user = User.objects.create_user(**self.cleaned_data)
-        return user
+        return User.objects.create_user(**self.cleaned_data)
 
 
 

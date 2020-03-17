@@ -1,7 +1,6 @@
 from django import forms
 from .models import Question, Answer
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 
 
 class LoginForm(forms.Form):
@@ -9,13 +8,16 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-class SignUpForm(UserCreationForm):
-    email = forms.EmailField(max_length=245, help_text='Это поле обязательно')
+class SignUpForm(forms.Form):
+    username = forms.CharField()
+    email = forms.EmailField(max_length=245)
+    password = forms.CharField(widget=forms.PasswordInput)
 
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password1', 'password2')
-        
+    def save(self):
+        user = User.objects.create_user(**self.cleaned_data)
+        return user
+
+
 
 class AskForm(forms.Form):
     title = forms.CharField()

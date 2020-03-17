@@ -26,8 +26,7 @@ def loginn(request):
 	if request.method == 'POST':
 		form = LoginForm(request.POST)
 		if form.is_valid():
-			cd = form.cleaned_data
-			user = authenticate(username=cd['username'], password=cd['password'])
+			user = authenticate(**form.cleaned_data)
 			if user:
 				login(request, user)
 				return redirect('main')
@@ -41,9 +40,7 @@ def signup(request):
 	if request.method == 'POST':
 		form = SignUpForm(request.POST)
 		if form.is_valid():
-			form.save()
-			cd = form.cleaned_data
-			user = authenticate(username=cd['username'], password=cd['password1'])
+			user = form.save()
 			login(request, user)
 			return redirect('main')
 	else:
